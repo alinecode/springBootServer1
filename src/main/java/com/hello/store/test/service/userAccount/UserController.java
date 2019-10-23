@@ -53,8 +53,14 @@ public class UserController {
 			return Boolean.FALSE;
 		}
 		
-		userService.addUser(user);
+		String flag = userService.addUser(user);
 		
-		return Boolean.TRUE;
+		if ("1".equals(flag)) {
+			return Boolean.TRUE;
+		}else {
+			return Boolean.FALSE;
+		}
+		
+		
 	}
 }

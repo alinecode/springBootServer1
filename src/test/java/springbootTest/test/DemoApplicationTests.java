@@ -11,11 +11,11 @@ public class DemoApplicationTests {
   public void contextLoads() {
 	  
 	  try {
-		Runtime.getRuntime().exec("cmd.exe /c start D:/Users/MACHENIKE/HBuilderProjects/firstVue/static/xxx.docx");
-		
+		System.err.println();
 		
 	} catch (Exception e) {
-		// TODO Auto-generated catch block cmd.exe /c start https://macsphere.mcmaster.ca/bitstream/11375/24789/2/kunj_finalthesis.pdf
+		//		Runtime.getRuntime().exec("cmd.exe /c start D:/Users/MACHENIKE/HBuilderProjects/firstVue/static/xxx.docx");
+		//      Auto-generated catch block cmd.exe /c start https://macsphere.mcmaster.ca/bitstream/11375/24789/2/kunj_finalthesis.pdf
 		e.printStackTrace();
 	}
 	  

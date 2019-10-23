@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.beetl.sql.core.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +32,17 @@ public class UserServiceImpl implements UserService {
 		
 		BeanUtils.copyProperties(accountDto, entity);
 		
+		Query<UserAccount> query = userDao.getSQLManager().query(UserAccount.class);
+		
+		UserAccount single = query.andEq("account", entity.getAccount()).single();
+		
+		if (single!=null) {
+			return "0";
+		}
+		
 		userDao.insert(entity);
 		
-		return "";
+		return "1";
 	}
 
 	@Override
@@ -41,14 +50,15 @@ public class UserServiceImpl implements UserService {
 		
 		String flag = "";
 		
-		UserAccount entity = new UserAccount();
-		BeanUtils.copyProperties(accountDto, entity);
-		List<UserAccount> template = userDao.template(entity);
+		Query<UserAccount> userquery = userDao.getSQLManager().query(UserAccount.class);
 		
-		if (template==null||template.size()!=1) {
+		UserAccount single = userquery.andEq("account", accountDto.getAccount())
+				.andEq("password", accountDto.getPassword()).single();
+		
+		if (single==null) {
 			flag = "0";
 		}else {
-			flag = JSON.toJSONString(template);
+			flag = JSON.toJSONString(single);
 		}
 //		JSONArray.parseArray(JSON.toJSONString(template));
 		
