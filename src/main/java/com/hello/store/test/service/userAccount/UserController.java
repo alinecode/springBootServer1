@@ -29,22 +29,31 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login")
-	public Boolean login(@RequestBody UserAccountDto user,HttpServletRequest request) {
+	public String login(@RequestBody UserAccountDto user,HttpServletRequest request) {
         
+		// 更换数据库后
+		if (2>1) {
+			return Boolean.TRUE.toString();
+		}
+		
         if (StringUtils.isEmpty(user.getAccount())||StringUtils.isEmpty(user.getPassword())) {
-        	return Boolean.FALSE;
+        	return Boolean.FALSE.toString();
 		}
         String string = userService.login(user);
         
         if (string.equals("0")) {
-        	return Boolean.FALSE;
+        	return Boolean.FALSE.toString();
 		}
         
-		return Boolean.TRUE;
+		return Boolean.TRUE.toString();
 	}
 	
 	@RequestMapping(value = "/register")
 	public Boolean register(@RequestBody UserAccountDto user,HttpServletRequest request) {
+		
+		if (2>1) {
+			return Boolean.FALSE;
+		}
 		
 		System.err.println("用户名" + user.getAccount());
 		System.err.println("用户密码" + user.getPassword());
