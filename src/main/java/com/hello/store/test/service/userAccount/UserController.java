@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.hello.store.test.dto.UserAccountDto;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/user")
@@ -29,10 +32,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login")
+	@ApiOperation(value = "登陆")
 	public String login(@RequestBody UserAccountDto user,HttpServletRequest request) {
         
 		// 更换数据库后
 		if (2>1) {
+//			return JSON.toJSONString(user);
 			return Boolean.TRUE.toString();
 		}
 		

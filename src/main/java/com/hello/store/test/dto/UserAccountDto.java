@@ -1,11 +1,14 @@
 package com.hello.store.test.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /* 
 * 用户帐号
 * gen by beetlsql 2019-09-25
 */
 public class UserAccountDto   {
 	
+	@ApiModelProperty(value = "用户id")
 	private String id ;
 	/*
 	禁用状态（0 启用  1 禁用）
