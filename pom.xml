@@ -101,7 +101,14 @@
     <artifactId>commons-lang3</artifactId>
 </dependency>
  
-  
+<!--  jwt  -->
+ <dependency>
+   <groupId>io.jsonwebtoken</groupId>
+   <artifactId>jjwt</artifactId>
+   <version>0.7.0</version>
+</dependency>
+ 
+ 
 <!--   Microsoft Office 开始 -->
 <dependency>
 			<groupId>org.apache.poi</groupId>
