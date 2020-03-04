@@ -1,6 +1,8 @@
 package com.hello.store.test.webSocket;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.websocket.OnClose;
@@ -34,7 +36,10 @@ public class WebSocketServer {
         this.session = session;
         webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
-        System.err.println(("有新窗口开始监听:"+sid+",当前在线人数为" + getOnlineCount()));
+        
+        String string = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        
+        System.err.println(string+(" 有新窗口开始监听:"+sid+",当前在线人数为" + getOnlineCount()));
 //        System.err.println(("有新窗口开始监听:"+sid+",当前在线人数为" + getOnlineCount()));
         this.sid=sid;
         try {
