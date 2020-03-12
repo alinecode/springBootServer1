@@ -1,15 +1,19 @@
 package com.hello.store.test.service.userAccount;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hello.store.test.dto.UserAccountDto;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -22,12 +26,33 @@ public class UserController {
 	@RequestMapping(value = "/chatInit")
 	public String chatInit(UserAccountDto user,HttpServletRequest request) {
         
+		try {
+			
+        String header = request.getHeader("Authorization");
+        String token = StringUtils.substringAfter(header, "bearer ");
+        
+        Claims claims = Jwts.parser().setSigningKey("test-secret".getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+        
+        String organization = (String) claims.get("organization");
+        
+        if (StringUtils.isNotBlank(organization)) {
+			
+        	return organization;
+		}
+        
+        
+		
         if (StringUtils.isEmpty(user.getAccount())) {
         	return Boolean.FALSE.toString();
 		}
         String string = userService.chatInit(user);
+        return string;
         
-		return string;
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
+			// TODO: handle exception
+		}
+		
 	}
 	
 	@SuppressWarnings("unused")

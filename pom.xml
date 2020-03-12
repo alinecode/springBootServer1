@@ -62,13 +62,12 @@
 <!--     <version>2.0.18.RELEASE</version> -->
 <!-- </dependency>  -->
     
-<!--     上面包的JwtAccessTokenConverter有点问题 -->
+<!--     oauth2 token生成等 -->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
             <version>2.1.6.RELEASE</version>
         </dependency>
-    
     
 <!--  database  -->
   <!-- https://mvnrepository.com/artifact/com.ibeetl/beetl-framework-starter -->
@@ -118,7 +117,7 @@
     <artifactId>commons-lang3</artifactId>
 </dependency>
  
-<!--  jwt  -->
+<!--  解析jwt使用  -->
  <dependency>
    <groupId>io.jsonwebtoken</groupId>
    <artifactId>jjwt</artifactId>

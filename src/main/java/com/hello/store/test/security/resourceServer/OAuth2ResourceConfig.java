@@ -1,4 +1,4 @@
-package com.hello.store.test.security;
+package com.hello.store.test.security.resourceServer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
