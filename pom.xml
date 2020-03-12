@@ -56,15 +56,18 @@
     <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 
-<dependency>
-    <groupId>org.springframework.security.oauth</groupId>
-    <artifactId>spring-security-oauth2</artifactId>
-    <version>2.0.14.RELEASE</version>
-</dependency> 
+<!-- <dependency> -->
+<!--     <groupId>org.springframework.security.oauth</groupId> -->
+<!--     <artifactId>spring-security-oauth2</artifactId> -->
+<!--     <version>2.0.18.RELEASE</version> -->
+<!-- </dependency>  -->
     
-    
-    
-    
+<!--     上面包的JwtAccessTokenConverter有点问题 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>2.1.6.RELEASE</version>
+        </dependency>
     
     
 <!--  database  -->
@@ -121,6 +124,13 @@
    <artifactId>jjwt</artifactId>
    <version>0.7.0</version>
 </dependency>
+
+<!-- <dependency> -->
+<!--     <groupId>com.auth0</groupId> -->
+<!--     <artifactId>java-jwt</artifactId> -->
+<!--     <version>3.8.1</version> -->
+<!-- </dependency> -->
+
  
  
 <!--   Microsoft Office 开始 -->

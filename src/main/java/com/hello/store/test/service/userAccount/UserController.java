@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
 import com.hello.store.test.dto.UserAccountDto;
 
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +30,7 @@ public class UserController {
 		return string;
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/login")
 	@ApiOperation(value = "登陆")
 	public String login(@RequestBody UserAccountDto user,HttpServletRequest request) {
@@ -53,6 +53,7 @@ public class UserController {
 		return Boolean.TRUE.toString();
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/register")
 	public Boolean register(@RequestBody UserAccountDto user,HttpServletRequest request) {
 		

@@ -15,6 +15,7 @@ public class ExcelUtils {
 	
 	public static void writeExcel_ToXLS(List<Object[]> list,OutputStream os) throws Exception {
 		// 创建一个空白的 WorkBook
+		@SuppressWarnings("resource")
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();// 2007
 
 		int rows = list.size() / 65535;// 每页最大65535 row
@@ -35,6 +36,7 @@ public class ExcelUtils {
 					Object data_cell = data_row[k];
 					if (data_cell != null) {
 						// 设置位置 和 类型
+						@SuppressWarnings("deprecation")
 						HSSFCell cell = row.createCell(k, Cell.CELL_TYPE_STRING);
 						// 设置值
 						cell.setCellValue(new HSSFRichTextString(data_cell.toString()));
