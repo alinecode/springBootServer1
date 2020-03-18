@@ -1,7 +1,5 @@
 package com.hello.store.test.service.userAccount;
 
-import java.nio.charset.StandardCharsets;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hello.store.test.dto.UserAccountDto;
+import com.hello.store.test.util.JWTRSAUtil;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -31,13 +29,18 @@ public class UserController {
         String header = request.getHeader("Authorization");
         String token = StringUtils.substringAfter(header, "bearer ");
         
-        Claims claims = Jwts.parser().setSigningKey("test-secret".getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
+//        Claims claims = Jwts.parser().setSigningKey("test-secret".getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
         
+        Claims claims = JWTRSAUtil.parseToken(token);
+        
+        // 取出自定义字段
         String organization = (String) claims.get("organization");
+        // 取出jwt默认放入的user_name
+        String user_name = (String) claims.get("user_name");
         
         if (StringUtils.isNotBlank(organization)) {
 			
-        	return organization;
+        	return organization+"||"+user_name;
 		}
         
         

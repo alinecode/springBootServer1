@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      *
      *在此处不拦截oauth要开放的资源
-     *优先使用ResourceServerConfigurerAdapter进行认证，这里不优先
      *
      */
 //    @Override

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 
 @Configuration
@@ -33,15 +35,35 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    //RSA配置
+//    @Value("${config.oauth2.privateKey}")
+//    private String privateKey ;
+//    @Value("${config.oauth2.publicKey}")
+//    private String publicKey;
     
     /**
-     * 对Jwt签名时，增加一个密钥
+     * 对Jwt签名，也就是一串jwt最后面那个。
      * JwtAccessTokenConverter：对Jwt来进行编码以及解码的类
+     * 
+     * 使用keytool工具来生成秘钥文件：(在cmd中使用，或者自己用java实现一个)
+     * cmd输入该段代码生成文件，生成过程中只需密码：  keytool -genkey -alias jwt -keyalg  RSA -keysize 1024 -validity 365 -keystore jwt.jks
+     * cmd输入该段代码生成证书(按需)：keytool -export -alias jwt -keystore jwt.jks -file publickey.cer
+     * 
+     * 根据源码，如果SigningKey是 -----BEGIN 开头，就 Configured with RSA signing key,所以也可以直接设置这个格式的public key
+     * 和private Key
+     * 
      */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("test-secret");
+//        converter.setSigningKey("test-secret");// 对称加密
+//        converter.setSigningKey(privateKey); // 非对称加密，签名key和验证key 不同
+//        converter.setVerifierKey(publicKey);
+        
+        KeyStoreKeyFactory keyStoreKeyFactory = 
+        	      new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "testjwt".toCharArray());
+        	    converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
+        
         return converter;
     }
     

@@ -3,6 +3,7 @@ package springbootTest.test;
 import org.junit.Test;
 
 import com.hello.store.test.dto.UserAccountDto;
+import com.hello.store.test.util.JWTRSAUtil;
 import com.hello.store.test.util.JwtUtil;
 
 import io.jsonwebtoken.Claims;
@@ -10,14 +11,37 @@ import io.jsonwebtoken.Claims;
 public class JwtUtilTest {
 
     @Test
+    public void testgenRSAJwt(){
+
+//        UserAccountDto user = new UserAccountDto();
+//        user.setId("9665");
+//        user.setAccount("george");
+    	
+//    	String token = JWTRSAUtil.generateToken("123", 3000);
+
+    	
+    	String token = JWTRSAUtil.getPublicKey();
+//    	String token = JWTRSAUtil.getPrivateKey();
+//        String token = JwtUtil.geneJsonWebToken(user);
+    	System.out.println("公钥内容111："+token);
+    	
+    	String pubkeyfile ="D:\\52pojie\\testForder\\publickey.cer";
+    	
+    	String publicKey = JWTRSAUtil.loadPubkey(pubkeyfile);
+		System.out.println("公钥内容222："+publicKey);
+
+    	
+    }
+    
+    @Test
     public void testGeneJwt(){
-
-        UserAccountDto user = new UserAccountDto();
-        user.setId("9665");
-        user.setAccount("george");
-        String token = JwtUtil.geneJsonWebToken(user);
-        System.out.println(token);
-
+    	
+    	UserAccountDto user = new UserAccountDto();
+    	user.setId("9665");
+    	user.setAccount("george");
+    	String token = JwtUtil.geneJsonWebToken(user);
+    	System.out.println(token);
+    	
     }
 
 
