@@ -45,7 +45,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * 对Jwt签名，也就是一串jwt最后面那个。
      * JwtAccessTokenConverter：对Jwt来进行编码以及解码的类
      * 
-     * 使用keytool工具来生成秘钥文件：(在cmd中使用，或者自己用java实现一个)
+     * 使用jdk的 keytool工具来生成秘钥文件：(在cmd中使用，或者自己用java实现一个)
      * cmd输入该段代码生成文件，生成过程中只需密码：  keytool -genkey -alias jwt -keyalg  RSA -keysize 1024 -validity 365 -keystore jwt.jks
      * cmd输入该段代码生成证书(按需)：keytool -export -alias jwt -keystore jwt.jks -file publickey.cer
      * 
@@ -82,8 +82,9 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.realm("oauth2-resources") // code授权添加
-                .tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()") // allow check token
+        oauthServer.realm("oauth2-resources") 
+                .tokenKeyAccess("permitAll()") //url:/oauth/token_key,exposes public key for token verification if using JWT tokens
+                .checkTokenAccess("isAuthenticated()") //url:/oauth/check_token allow check token
                 .allowFormAuthenticationForClients();
     }
 
@@ -105,6 +106,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
+     * 根据 https://www.oauth.com/oauth2-servers/access-tokens/password-grant/ ：
+     *  (required if the client was issued a secret)
      *  ClientDetailsServiceConfigurer 能够使用内存或 JDBC 方式实现获取已注册的客户端详情，有几个重要的属性：
      *  clientId：客户端标识 ID
      *  secret：客户端安全码
@@ -118,8 +121,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory().withClient("demoApp").secret(bCryptPasswordEncoder.encode("demoAppSecret"))
                 .redirectUris("http://baidu.com")// code授权添加
                 .authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token")
-                .scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(1200)
-                .refreshTokenValiditySeconds(50000);
+                .scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(1200) // 设置1200秒，也就是20分钟失效
+                .refreshTokenValiditySeconds(60*60*24); // refresh token 24小时失效
     }
 
 }

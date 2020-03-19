@@ -44,16 +44,18 @@ public class JWTRSAUtil {
     }
     
     public static String getPublicKey() {
-    	
-//    	System.out.println("签名公钥内容："+Base64.encodeBase64String(publicKey.getEncoded()));
+//    	System.out.println("-----Begin Public Key-----");//非必须
+//    	System.out.println("Base64.encodeBase64String(publicKey.getEncoded()));
+//    	System.out.println("-----End Public Key-----");//非必须
     	
 		return Base64.encodeBase64String(publicKey.getEncoded());
     }
     
     public static String getPrivateKey() {
     	
-//    	System.out.println("签名私钥内容："+Base64.encodeBase64String(privateKey.getEncoded()));
-    	
+//    	System.out.println("-----Begin Private Key-----\r\n");//非必须
+//    	System.out.println("Base64.encodeBase64String(privateKey.getEncoded()));
+//    	System.out.println("\r\n-----End Private Key-----");//非必须
     	return Base64.encodeBase64String(privateKey.getEncoded());
     }
 
