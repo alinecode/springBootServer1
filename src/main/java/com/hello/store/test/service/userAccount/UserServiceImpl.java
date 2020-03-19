@@ -127,6 +127,18 @@ public class UserServiceImpl implements UserService {
 		 
 		return reString;
 	}
+
+	@Override
+	public UserAccountDto queryUserByUsername(String username) {
+
+		UserAccountDto account = new UserAccountDto();
+		
+		account.setId("1");
+		account.setAccount("1");
+		account.setPassword("1");
+		
+		return account;
+	}
 	
 }
 

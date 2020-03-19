@@ -1,4 +1,4 @@
-package com.hello.store.test.util;
+package com.hello.store.test.swagger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class SwaggerConfig {
     	return new ApiInfoBuilder()  
             .title("api swagger document")  
             .description("前后端联调swagger api 文档")  
-            .version("2.1.5.5")  
+            .version("2.9.2")  
             .build();
     }  
 

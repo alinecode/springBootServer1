@@ -11,4 +11,7 @@ public interface UserService {
 
 
 	String chatInit(UserAccountDto user);
+
+
+	UserAccountDto queryUserByUsername(String username);
 }
