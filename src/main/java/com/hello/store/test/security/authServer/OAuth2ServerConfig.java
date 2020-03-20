@@ -34,6 +34,12 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+    /**
+     * 数据源
+     */
+//    @Autowired
+//    private DataSource dataSource;
+	
 	// RSA配置
 //    @Value("${config.oauth2.privateKey}")
 //    private String privateKey ;
@@ -117,11 +123,19 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("demoApp").secret(bCryptPasswordEncoder.encode("demoAppSecret"))
+		
+//		clients.
+		
+//		clients.jdbc(dataSource);
+		
+		
+		clients.inMemory().withClient("zdemo").secret(bCryptPasswordEncoder.encode("zdemoSecret"))
 				.redirectUris("http://baidu.com")// code授权添加
 				.authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token")
 				.scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(1200) // 设置1200秒，也就是20分钟失效
 				.refreshTokenValiditySeconds(60 * 60 * 24); // refresh token 24小时失效
 	}
 
+	
+	
 }

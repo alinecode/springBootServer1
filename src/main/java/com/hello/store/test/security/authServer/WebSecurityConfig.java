@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * 加载时使用，加载内存式用户
+	 * 加载时使用，可以加载内存式用户
 	 */
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

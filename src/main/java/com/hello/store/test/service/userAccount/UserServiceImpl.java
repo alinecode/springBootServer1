@@ -130,7 +130,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserAccountDto queryUserByUsername(String username) {
-
+		
+		// 此处应该查询数据库，返回dto
 		UserAccountDto account = new UserAccountDto();
 		
 		account.setId("1");
