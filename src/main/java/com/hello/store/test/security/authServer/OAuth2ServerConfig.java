@@ -29,7 +29,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 	private AuthenticationManager authenticationManager; // 注入权限验证控制器 来支持 password grant type
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder; // 也可以把WebSecurityConfig中注入的bean移到这里，省略一些代码
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -132,7 +132,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 		clients.inMemory().withClient("zdemo").secret(bCryptPasswordEncoder.encode("zdemoSecret"))
 				.redirectUris("http://baidu.com")// code授权添加
 				.authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token")
-				.scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(1200) // 设置1200秒，也就是20分钟失效
+				.scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(12000) // 设置1200秒，也就是20分钟失效
 				.refreshTokenValiditySeconds(60 * 60 * 24); // refresh token 24小时失效
 	}
 

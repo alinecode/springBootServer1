@@ -106,6 +106,10 @@ public class UserController {
 //
 //			return organization + "||" + user_name;
 //		}
+		
+		System.out.println(aa);
+//		System.err.println(aa);
+		
 		if (StringUtils.isNotBlank(aa)) {
 			
 			return aa + "||" ;
