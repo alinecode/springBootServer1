@@ -23,6 +23,7 @@ import com.itextpdf.text.pdf.*;
 /**
  * 一些示例
  * 参考https://www.cnblogs.com/LUA123/p/11580525.html
+ * https://itextpdf.com/en/resources/examples/itext-5-legacy
  */
 public class Tables {
 //    public static final String FONT = "pdf/华庚少女字体.ttf";
@@ -33,9 +34,9 @@ public class Tables {
     
     // 测试
     public static void main(String[] args) throws IOException, DocumentException {
-//        File file = new File(DEST);
-//        file.getParentFile().mkdirs(); // 创建
-//        new Tables().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs(); // 创建
+        new Tables().createPdf(DEST);
     }
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
@@ -273,18 +274,19 @@ public class Tables {
         cell = new PdfPCell(new Phrase(" ", font));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(Rectangle.NO_BORDER);
+        cell.setColspan(2);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase(" ", font));
-        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+//        cell = new PdfPCell(new Phrase(" ", font));
+//        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+//        cell.setBorder(Rectangle.NO_BORDER);
+//        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("", font));
         cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("打印时间:  2020/04/08", font));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(Rectangle.NO_BORDER);
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("", font));
-        cell.setBorder(Rectangle.NO_BORDER);
-        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.addCell(cell);
         // 空一行
         cell = new PdfPCell(new Phrase(" ", font));
@@ -299,12 +301,18 @@ public class Tables {
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.addCell(cell);
+        
+        cell = new PdfPCell(new Phrase(" ", font));
+        cell.setColspan(1);
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        table.addCell(cell);
+        
         cell = new PdfPCell(new Phrase("\n\n\n xx市社会保险管理局(电子用印)\n\n"+"2020/04/08", font));
         cell.setColspan(1);
         cell.setRowspan(5);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        
         // 签章
         Image image = Image.getInstance(IMG1);
         cell.setCellEvent(new ImageBackgroundEvent(image));
@@ -314,11 +322,13 @@ public class Tables {
 //        cell.setBorder(Rectangle.NO_BORDER);
 //        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 //        table.addCell(cell);
-        cell = new PdfPCell(new Phrase(" ", font));
-        cell.setColspan(2);
-        cell.setBorder(Rectangle.NO_BORDER);
-        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        table.addCell(cell);
+        
+//        cell = new PdfPCell(new Phrase(" ", font));
+//        cell.setColspan(1);
+//        cell.setBorder(Rectangle.NO_BORDER);
+//        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+//        table.addCell(cell);
+        
 //        cell = new PdfPCell(new Phrase(" ", font));
 //        cell.setBorder(Rectangle.NO_BORDER);
 //        cell.setHorizontalAlignment(Element.ALIGN_LEFT);

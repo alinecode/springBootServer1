@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hello.store.test.dto.UserAccountDto;
-import com.hello.store.test.util.JWTRSAUtil;
+import com.hello.store.test.web.Data;
+import com.hello.store.test.web.Rtn;
 
-import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -88,34 +88,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/test")
-	public String testname(String aa , HttpServletRequest request) throws Exception {
-
-//		String header = request.getHeader("Authorization");
-//		String token = StringUtils.substringAfter(header, "bearer ");
-
-//	        Claims claims = Jwts.parser().setSigningKey("test-secret".getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
-
-//		Claims claims = JWTRSAUtil.parseToken(token);
-//
-//		// 取出自定义字段
-//		String organization = (String) claims.get("organization");
-//		// 取出jwt默认放入的user_name
-//		String user_name = (String) claims.get("user_name");
-
-//		if (StringUtils.isNotBlank(organization)) {
-//
-//			return organization + "||" + user_name;
-//		}
+	public Data testname(String aa , HttpServletRequest request ,Rtn<String> rtn) throws Exception {
 		
 		System.out.println(aa);
-//		System.err.println(aa);
 		
 		if (StringUtils.isNotBlank(aa)) {
 			
-			return aa + "||" ;
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("aa", aa);
+			
+			return  rtn.success(aa);
 		}
-
-		return null;
+		
+		return Rtn.error("值为空");
+		
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
 	}
 
