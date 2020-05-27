@@ -21,8 +21,8 @@ import com.hello.store.test.entity.UserAccount;
  * @author 
  *
  */
-@Configuration // 启动时加载配置
-@EnableCaching // 开启缓存
+//@Configuration // 启动时加载配置      使用时，此处注解不要注释掉了
+//@EnableCaching // 开启缓存
 public class UserRedis {
 
 	@Autowired

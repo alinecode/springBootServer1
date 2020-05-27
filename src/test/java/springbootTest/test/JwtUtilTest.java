@@ -43,6 +43,17 @@ public class JwtUtilTest {
     	System.out.println(token);
     	
     }
+    
+    @Test
+    public void teststr(){
+    	String string = "/02_Front/01_SourceCode/static1/store-manage-pro/static/test";
+    	
+    	String[] split = string.split("/static/");
+    	
+    	System.out.println(split[0]);
+    	System.out.println("/static/"+split[1]);
+    	
+    }
 
 
     @Test
