@@ -73,4 +73,22 @@ public class JwtUtilTest {
             System.out.println("非法token");
         }
     }
+    
+    @Test
+    public void testCheck2(){
+    	String string = "ahfiusdfhisdfjiosvfjid";
+    	String string2 = "ahfiusdfhisdfjiosvfjid";
+    	
+    	System.err.println(string==string2);
+    	
+    	String s = new String("ab");
+    	String a = new String("c");
+//    	s.intern();
+    	String s2=s+a;
+    	String s1 = "abc";
+    	System.out.println(s2 == s1);
+    	
+    }
+    
+    
 }

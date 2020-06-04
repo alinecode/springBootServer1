@@ -36,8 +36,8 @@ public class DemoApplicationTests {
    */
   @Test
   public void testFindByTitleLike() {
-      List<Test1> res = test1Repository.findByNameLike("小");
-      System.err.println(res);
+//      List<Test1> res = test1Repository.findByNameLike("小");
+//      System.err.println(res);
       
   }
   

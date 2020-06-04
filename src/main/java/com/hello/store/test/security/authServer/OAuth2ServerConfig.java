@@ -132,7 +132,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 		clients.inMemory().withClient("zdemo").secret(bCryptPasswordEncoder.encode("zdemoSecret"))
 				.redirectUris("http://baidu.com")// code授权添加
 				.authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token")
-				.scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(12000) // 设置1200秒，也就是20分钟失效
+				.scopes("all").resourceIds("oauth2-resource").accessTokenValiditySeconds(86400*2) // 设置1200秒，也就是20分钟失效
 				.refreshTokenValiditySeconds(60 * 60 * 24); // refresh token 24小时失效
 	}
 
