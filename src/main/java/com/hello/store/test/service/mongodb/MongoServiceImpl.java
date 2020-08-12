@@ -27,7 +27,7 @@ public class MongoServiceImpl implements MongoService {
 
 		// 模糊查询需要自己写regex 此处为包含名称。并且Enables case-insensitive matching. 
 		Pattern pattern = Pattern.compile(name,Pattern.CASE_INSENSITIVE);
-		
+		// 简单的字符：//模糊查询以 ^开始 以$结束 .*相当于sql中的%  比如 "^1.*$" 查询以1开头的
 		Criteria lte = Criteria.where("creatdata").gt(startDate).lte(endDate).and("name").regex(pattern);
 		
 		query.addCriteria(lte).with(pageable);
@@ -43,6 +43,22 @@ public class MongoServiceImpl implements MongoService {
 //				   new BasicDBObject("$gte",startDate).append("$lt",endDate ));
 //		// 或者不在构造函数中使用new
 //		query2.put("dateAdded", BasicDBObjectBuilder.start("$gte", startDate).add("$lte", endDate).get());
+		
+	}
+
+	@Override
+	public void insertList(List<Test1> list) {
+		
+		// 批量新增
+		mongoTemplate.insert(list, "test1");
+		// 新增一个
+//		mongoTemplate.insert(list.get(0), "test1");
+		
+	}
+
+	@Override
+	public void update(Test1 test1) {
+		// TODO Auto-generated method stub
 		
 	}
 

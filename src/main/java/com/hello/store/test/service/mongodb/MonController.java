@@ -27,6 +27,10 @@ public class MonController {
 	@Autowired
 	MongoService mongoService;
 
+	/**
+	 * 测试查询
+	 * @return
+	 */
 	@RequestMapping(value = "/test4")
 	public String test4() {
 
@@ -51,7 +55,61 @@ public class MonController {
 		}
 
 	}
+	
+	/**
+	 * 测试新增
+	 * @return
+	 */
+	@RequestMapping(value = "/test5")
+	public String test5() {
+		
+		try {
+			
 
+//			List<Test1> list = new ArrayList<>();
+//			
+////			list.add(new Test1("小0", 10, new Date()));
+//			list.add(new Test1("小1", 11, new Date()));
+//			list.add(new Test1("小2", 12, new Date()));
+//			list.add(new Test1("小3", 13, new Date()));
+//			list.add(new Test1("小4", 14, new Date()));
+//			
+//			mongoService.insertList(list);
+			
+			return "1";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getLocalizedMessage();
+		}
+		
+	}
+	
+	/**
+	 * 测试修改
+	 * @return
+	 */
+	@RequestMapping(value = "/test6")
+	public String test6() {
+		
+		try {
+			
+			Test1 test1 = new Test1("5ed88e7c045923244caf7320", "小00", 10, new Date());
+			
+			mongoService.update(test1);
+			
+			return "1";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getLocalizedMessage();
+		}
+		
+	}
+
+	
+	
+	
 //	@RequestMapping(value = "/test1")
 //	public String test1(HttpServletRequest request) {
 //
