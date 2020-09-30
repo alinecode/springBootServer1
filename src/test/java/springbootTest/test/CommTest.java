@@ -1,16 +1,65 @@
 package springbootTest.test;
 
 public class CommTest {
-
+	
 	public static void main(String[] args) {
+		
+		double aa = 6.5444444256666;
+		
+		Float abcFloat = (float) aa;
+		
+		System.err.println(abcFloat);
+		
+//		int c = 5;
+//		int a = 1;
+//		int b = (a+c++);
+//		System.err.println(b);
+//		System.err.println(a+c);
+//		String bString = new String("ab");
+//		String aString = new String("ab");
+//		String aString = "aab";
 
-
+//		System.err.println(aString == bString);
 //		conCase("dkfjsdl");
 		
-		shuixianhua();
+//		shuixianhua2(aString);
+//		
+//		System.err.println(aString);
+		
+//		T1 t1 = new T1();
+//		
+//		shuixianhua3(t1);
+//		
+//		System.err.println(t1.string);
+//		shuixianhua();
+		
+//		String string = "123.5";
+//		String[] split = string.split("\\.");
+//		System.err.println(split[0]);
+//		string.split(",");
+		
 		
 	}
-
+	
+	public static T1 shuixianhua3(T1 aa) {
+		
+		aa.string = "123";
+		
+		return aa;
+		
+//		System.err.println(aa == "aab");
+		
+	}
+	
+	public static String shuixianhua2(String aa) {
+		 aa = "123";
+				 
+		return aa;
+		
+//		System.err.println(aa == "aab");
+		
+	}
+	
 	public static void shuixianhua() {
 		
 		int a = 999;
