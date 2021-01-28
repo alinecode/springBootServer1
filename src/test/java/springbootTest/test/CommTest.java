@@ -1,15 +1,85 @@
 package springbootTest.test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 public class CommTest {
-	
+
 	public static void main(String[] args) {
+
 		
-		double aa = 6.5444444256666;
 		
-		Float abcFloat = (float) aa;
+//		Predicate<String> predicate = (String aa) -> {
+//			return "aaa".equals(aa);
+//		};
+//		System.err.println(predicate.test("aaa"));
 		
-		System.err.println(abcFloat);
+//		List<String> list = new ArrayList<String>();
+//		list.add("F1");
+//		list.add("F2");
+//		list.add("F3");
+//		
+//		for (String temp : list) {
+//			if ("F3".equals(temp)) {
+//				list.remove(temp);
+//			}
+//		}
+//		
+//		for (String string : list) {
+//			System.err.println(string);
+//		}
 		
+//		String bString = "0";
+//		Integer a = 0;
+//		System.err.println(bString.equals(a));
+		
+//		List<String> list1 = new ArrayList<>();
+//
+//		list1.add("1");
+//		list1.add("2");
+//		list1.add("3");
+//		
+//		List<String> list2 = new ArrayList<>();
+//		
+//		list2.addAll(list1);
+//		
+//		list2.remove(0);
+//		
+//		for (int i = 0; i < list1.size(); i++) {
+//			System.err.println(list1.get(i));
+//		}
+		
+//		list.add("a");
+//
+//		for (int i = 0; i < list.size() - 1; i++) {
+//			System.err.println("tt"+list.size());
+//			for (int j = list.size() - 1; j > i; j--) {
+//				System.err.println("aa"+list.size());
+//				if (list.get(j).equals(list.get(i))) {
+//					list.remove(j);
+//				}
+//			}
+//		}
+
+//		System.err.println(list.size());
+		
+//    	String iString = new String("你") ;
+//    	String iString2 = "你";
+//    	
+//    	Object object = iString;
+//    	Object object2 = iString2;
+//    	
+//    	boolean equals = object.equals(object2);
+//		
+//    	System.err.println(equals);
+
+//		double aa = 6.5444444256666;
+//		
+//		Float abcFloat = (float) aa;
+//		
+//		System.err.println(abcFloat);
+
 //		int c = 5;
 //		int a = 1;
 //		int b = (a+c++);
@@ -21,109 +91,107 @@ public class CommTest {
 
 //		System.err.println(aString == bString);
 //		conCase("dkfjsdl");
-		
+
 //		shuixianhua2(aString);
 //		
 //		System.err.println(aString);
-		
+
 //		T1 t1 = new T1();
 //		
 //		shuixianhua3(t1);
 //		
 //		System.err.println(t1.string);
 //		shuixianhua();
-		
+
 //		String string = "123.5";
 //		String[] split = string.split("\\.");
 //		System.err.println(split[0]);
 //		string.split(",");
-		
-		
+
 	}
-	
+
 	public static T1 shuixianhua3(T1 aa) {
-		
+
 		aa.string = "123";
-		
+
 		return aa;
-		
+
 //		System.err.println(aa == "aab");
-		
+
 	}
-	
+
 	public static String shuixianhua2(String aa) {
-		 aa = "123";
-				 
+		aa = "123";
+
 		return aa;
-		
+
 //		System.err.println(aa == "aab");
-		
+
 	}
-	
+
 	public static void shuixianhua() {
-		
+
 		int a = 999;
-		
+
 //		int dangqian = a; // 当前数字
-		
-		while (a>99) {
-			
+
+		while (a > 99) {
+
 			int a1 = a % 10; // 个位
 			int a2 = a / 10 % 10; // 十位
 //			int a3 = a / 100 % 10 ; // 百位 都一样
-			int a3 = a / 100 ; // 百位
-			
-			if (Math.pow(a1, 3)+Math.pow(a2, 3)+Math.pow(a3, 3) == a) {
-				
+			int a3 = a / 100; // 百位
+
+			if (Math.pow(a1, 3) + Math.pow(a2, 3) + Math.pow(a3, 3) == a) {
+
 				System.err.println(a);
-				
+
 			}
-			
+
 			a--;
 		}
-		
+
 	}
-	
-	
+
 	public static void conCase(String str) {
-		
+
 		// 转换指定字符为大写
 		char[] charArray = str.toCharArray();
 		charArray[0] -= 32;
 		charArray[1] -= 32;
-		
+
 		char c = charArray[0];
-		
-		int b = c+32;
-		
+
+		int b = c + 32;
+
 //		instance
-		
+
 //		if (charArray[0] instanceof type) {
 //			type new_name = (type) charArray[0];
 //			
 //		}
-		
+
 		System.err.println(charArray[0]);
-		
+
 		str = String.valueOf(charArray);
 		System.out.println(charArray);
 //		System.out.println(str);
-	 
+
 		// 转换指定字符为小写
 		charArray[0] += 32;
 		charArray[1] += 32;
 		str = String.valueOf(charArray);
 //		System.out.println(str);
-	 
+
 		// 全部转大写或小写
 //		System.out.println(str.toLowerCase());
 //		System.out.println(str.toUpperCase());
-		
+
 	}
-	
-	
+
 	/**
 	 * 2的出现次数
+	 * 
 	 * @param n
 	 * @return
 	 */
@@ -228,42 +296,39 @@ public class CommTest {
 //				}
 
 	}
-	
+
 	public static int mytest(int n) {
-		if ( n < 2 )
+		if (n < 2)
 			return 0;
-		
+
 		int count = 0;
 		int qz = 1;
 		int jiequ = n;
-		
+
 		while (jiequ > 0) {
-			
+
 			int zh = jiequ % 10; // 最后这个数字。也就是当前权所在位置的值。
-			
+
 			jiequ /= 10; // 把n这个字符串往前移动一个位置
-			
-			count += ( jiequ * qz ); // 前面的值，乘以当前权值，等于当前位置，2的出现数量。（实际大概1-9所有的都一样）
-			
+
+			count += (jiequ * qz); // 前面的值，乘以当前权值，等于当前位置，2的出现数量。（实际大概1-9所有的都一样）
+
 			// 如果小于2，那么此处仅会出现高位*权重 的 次数。上面已经计算了。
-			
+
 			// 如果要判断的这个位置的值就等于2，那么就计算它的低位数字，就等于2在该权位置的变换次数，变换一次，就有一个2出现
 			if (zh == 2) {
 				// 所以使用源数字n除以已有权重取余，就可以得到低高位数字，再加上本来的
-				count += n % qz +1;
-			}else if (zh > 2) {
+				count += n % qz + 1;
+			} else if (zh > 2) {
 				// 如果比2还要大，
 				count += qz;
 			}
-			
-			
-			qz*=10; // 权值向左移动一位
-			
+
+			qz *= 10; // 权值向左移动一位
+
 		}
-		
-		
+
 		return count;
- 	}
-	
+	}
 
 }
