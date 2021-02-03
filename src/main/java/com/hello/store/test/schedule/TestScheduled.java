@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
  *
  */
 //@Component  // 让注解方法@Scheduled和@Bean生效。
+//Component注解和Configuration注解的区别，可以看看 https://blog.csdn.net/isea533/article/details/78072133 
+//简单说就是@Configuration的@Bean方法会进行cglib代理增强
 public class TestScheduled {
 
 //	@Scheduled(cron = "0 0 12 * * ?") // 每天中午12点执行。 Fire at 12:00 PM (noon) every day
@@ -40,7 +42,6 @@ public class TestScheduled {
 	public TaskScheduler taskScheduler() {
 		return new ConcurrentTaskScheduler();
 	}
-	
 	
 //	/**
 //	 * 这个也可以
