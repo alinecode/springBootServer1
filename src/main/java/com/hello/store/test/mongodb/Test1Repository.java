@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.repository.Query;
 import com.hello.store.test.entity.Test1;
 
 /**
+ * 弃用
  * https://spring.io/guides/gs/accessing-data-mongodb/
  * https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#reference
  * https://docs.spring.io/spring-data/mongodb/docs/1.2.0.RELEASE/reference/html/mongo.repositories.html

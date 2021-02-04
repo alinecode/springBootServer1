@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -80,6 +81,57 @@ public class MonController {
 //			list.add(new Test1("小4", 14, new Date()));
 //			
 //			mongoService.insertList(list);
+			
+			return "1";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getLocalizedMessage();
+		}
+		
+	}
+	
+	
+	
+	@RequestMapping("testdel")
+	public String testdel(String id) {
+
+		if (StringUtils.isBlank(id)) {
+			id = "5ed88e7c045923244caf7320";
+		}
+		
+		Test1 test1 = new Test1();
+		
+		test1.setId(id);
+		
+		mongoService.delete(test1);
+		
+		return "1";
+	
+		
+		
+	}
+	
+	
+	@RequestMapping(value = "/testupdate")
+	public String testupdate() {
+		
+		try {
+			
+			
+//			List<Test1> list = new ArrayList<>();
+//			
+////			list.add(new Test1("小0", 10, new Date()));
+//			list.add(new Test1("小1", 11, new Date()));
+//			list.add(new Test1("小2", 12, new Date()));
+//			list.add(new Test1("小3", 13, new Date()));
+//			list.add(new Test1("小4", 14, new Date()));
+//			
+//			mongoService.insertList(list);
+			
+			Test1 test1 = new Test1("小红红", 14, new Date());
+			
+			mongoService.update(test1);;
 			
 			return "1";
 			

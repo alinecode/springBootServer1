@@ -27,4 +27,6 @@ public interface MongoService {
 
 	public void update(Test1 test1);
 	
+	public void delete(Test1 test1);
+	
 }
