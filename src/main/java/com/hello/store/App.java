@@ -21,7 +21,7 @@ public class App extends SpringBootServletInitializer{
 	
 	/**
 	 * 要打成war包就需要继承SpringBootServletInitializer，重写configure。
-	 * 实测不加而且仅修改pom.xml的话Tomcat启动后将无法正常访问。
+	 * 实测不加而且仅修改pom.xml的话,打成war包后在Tomcat启动后将无法正常访问。
 	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

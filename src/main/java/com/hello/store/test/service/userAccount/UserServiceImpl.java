@@ -20,7 +20,7 @@ import com.hello.store.test.webSocket.ImUserInfoData;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserAccountDao userDao;
+	UserAccountDao userAccountDao;
 
 	@Override
 	public String addUser(UserAccountDto accountDto) {
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		
 		BeanUtils.copyProperties(accountDto, entity);
 		
-		Query<UserAccount> query = userDao.getSQLManager().query(UserAccount.class);
+		Query<UserAccount> query = userAccountDao.getSQLManager().query(UserAccount.class);
 		
 		UserAccount single = query.andEq("account", entity.getAccount()).single();
 		
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			return "0";
 		}
 		
-		userDao.insert(entity);
+		userAccountDao.insert(entity);
 		
 		return "1";
 	}
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		
 		String flag = "";
 		
-		Query<UserAccount> userquery = userDao.getSQLManager().query(UserAccount.class);
+		Query<UserAccount> userquery = userAccountDao.getSQLManager().query(UserAccount.class);
 		
 		UserAccount single = userquery.andEq("account", accountDto.getAccount())
 				.andEq("password", accountDto.getPassword()).single();

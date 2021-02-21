@@ -8,16 +8,22 @@
   <name>springbootTest Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
-  <parent>
+<!--   <parent> -->
+<!--     <groupId>org.springframework.boot</groupId> -->
+<!--     <artifactId>spring-boot-starter-parent</artifactId> -->
+<!--     <version>2.0.0.RELEASE</version> -->
+<!-- 	</parent> -->
+
+<!-- 更新springboot版本 -->
+    <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.0.RELEASE</version>
-	</parent>
-  
-
+    <version>2.4.3</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
 
   <dependencies>
-
+  
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web</artifactId>
@@ -48,9 +54,23 @@
 <dependency>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
-    <version>3.2.5</version>
+<!--     <version>3.2.5</version> -->
+    <version>3.3.8</version>
 </dependency>
-    
+
+<!-- 解决springboot升级后启动报错问题 不用这个-->
+<!--           <dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-validator</artifactId> -->
+<!--             <version>5.2.4.Final</version> -->
+<!--         </dependency> -->
+
+<!-- 解决springboot升级后启动报错问题 用这个 -->
+    <dependency> 
+    <groupId>org.springframework.boot</groupId> 
+    <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+<!--参考https://stackoverflow.com/questions/36329001/  -->
     
     
 <!--     redis -->
@@ -113,12 +133,16 @@
 <dependency>
     <groupId>com.ibeetl</groupId>
     <artifactId>beetl-framework-starter</artifactId>
-    <version>1.2.14.RELEASE</version>
+<!--     <version>1.2.14.RELEASE</version> -->
+<!--     <version>1.2.38.RELEASE</version> -->
+<!--     <version>1.2.28.RELEASE</version> -->
+    <version>1.2.35.RELEASE</version>
 </dependency>
+
   <dependency>
    <groupId>mysql</groupId>
    <artifactId>mysql-connector-java</artifactId>
-   <scope>runtime</scope>
+<!--    <scope>runtime</scope> -->
 </dependency>
 
 <dependency>
@@ -128,15 +152,24 @@
 </dependency>
 
   <!-- https://mvnrepository.com/artifact/com.ibeetl/beetlsql -->
-<dependency>
-    <groupId>com.ibeetl</groupId>
-    <artifactId>beetlsql</artifactId>
-    <version>2.12.13.RELEASE</version>
-</dependency>
+<!--     <version>2.12.13.RELEASE</version> -->
+<!-- <dependency> -->
+<!--     <groupId>com.ibeetl</groupId> -->
+<!--     <artifactId>beetlsql</artifactId> -->
+<!--     <version>3.2.6-RELEASE</version> -->
+<!-- </dependency> -->
   <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
   </dependency>
+  
+<!--   beetlsql升级到3.x需要一个连接池 -->
+          <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+  
   
   <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 <dependency>

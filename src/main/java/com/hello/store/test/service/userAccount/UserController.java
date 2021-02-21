@@ -45,10 +45,10 @@ public class UserController {
 	public String login(@RequestBody UserAccountDto user, HttpServletRequest request) {
 
 		// 更换数据库后
-		if (2 > 1) {
-//			return JSON.toJSONString(user);
-			return Boolean.TRUE.toString();
-		}
+//		if (2 > 1) {
+////			return JSON.toJSONString(user);
+//			return Boolean.TRUE.toString();
+//		}
 
 		if (StringUtils.isEmpty(user.getAccount()) || StringUtils.isEmpty(user.getPassword())) {
 			return Boolean.FALSE.toString();

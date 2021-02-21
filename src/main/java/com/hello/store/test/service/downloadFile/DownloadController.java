@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 
- * 下载文件 测试中 20210128
+ * 下载文件  20210204
  * @author 
  *
  */
@@ -33,12 +33,6 @@ public class DownloadController {
 		downLoadFile("D:\\TEMP\\upload", "\\aa.txt", "测试.txt", response);
 	}
 	
-	/**
-	 * 
-	 * @param realFileName    原来文件的名字（包括后缀）
-	 * @param rootPath        根目录
-	 * @param relativeFileUrl 文件相对地址（包括uuid.**的文件名)
-	 */
 	private void downLoadFile(String rootPath, String relativeFileUrl, String realFileName,
 			HttpServletResponse response) {
 		String path = rootPath + relativeFileUrl;
@@ -56,12 +50,8 @@ public class DownloadController {
 			// 清空response
 			response.reset();
 			// 设置response的Header，设置下载文件的真实名字（包括后缀）
-//			String lString = new String(realFileName.getBytes("UTF-8"));
-//			String iso_filename = parseGBK(lString);
 			response.addHeader("Content-Disposition",
-//			"attachment;filename=" + parseGBK(new String(realFileName.getBytes("UTF-8"))));
 			"attachment;filename=" + URLEncoder.encode(realFileName, "UTF-8"));
-//			"attachment;filename=" + new String(realFileName.getBytes("UTF-8")));
 			response.addHeader("Content-Length", "" + file.length());
 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
 			response.setContentType("application/octet-stream");
