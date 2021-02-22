@@ -86,7 +86,7 @@ public class HttpsendTest {
 	    params.add("aa", "aa-string");
 		
 	    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<MultiValueMap<String, Object>>(params,headers);
-	    // post和get类似，区别是传参方式等
+	    // post和get类似，区别是传参方式等，需要使用MultiValueMap
 	    ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class); 
 	    // 方式2 ... 方式3 ...
 	    
@@ -113,7 +113,7 @@ public class HttpsendTest {
 		// 设置请求体
 		FileSystemResource resource = new FileSystemResource(new File("D:/TEMP/upload/aa.txt"));
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-	    params.add("aa", resource);
+	    params.add("aa", resource); // 注意这里的aa，和接收端的 @RequestParam("aa") MultipartFile multipartFile 一致，否则不是变量名multipartFile则无法接收
 		
 	    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<MultiValueMap<String, Object>>(params); 
 
