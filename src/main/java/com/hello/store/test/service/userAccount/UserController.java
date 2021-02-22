@@ -39,7 +39,6 @@ public class UserController {
 
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/login")
 	@ApiOperation(value = "登陆")
 	public String login(@RequestBody UserAccountDto user, HttpServletRequest request) {
