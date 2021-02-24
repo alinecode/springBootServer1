@@ -51,7 +51,7 @@ public class DownloadController {
 			response.reset();
 			// 设置response的Header，设置下载文件的真实名字（包括后缀）
 			response.addHeader("Content-Disposition",
-			"attachment;filename=" + URLEncoder.encode(realFileName, "UTF-8"));
+			"attachment;filename=" + URLEncoder.encode(realFileName, "UTF-8")); // 预览的话，不触发下载，把attachment改成inline
 			response.addHeader("Content-Length", "" + file.length());
 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
 			response.setContentType("application/octet-stream");

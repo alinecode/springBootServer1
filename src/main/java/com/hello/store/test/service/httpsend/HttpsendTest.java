@@ -73,7 +73,7 @@ public class HttpsendTest {
 	 */
 	public String sendtestPost() {
 		
-		// 带参数的url，把变量用大括号括起来
+		// 
 		String url = "http://127.0.0.1:9995/store-service/user/test";
 		
 		// 可以设置请求头

@@ -30,9 +30,9 @@ public class HttpsendTestController {
 	@RequestMapping("file")
 	public String file() {
 		
-		String sendtestPost = httpsendTest.sendtestFile();
+		String sendtestfile = httpsendTest.sendtestFile();
 		
-		return sendtestPost;
+		return sendtestfile;
 	}
 	
 }
