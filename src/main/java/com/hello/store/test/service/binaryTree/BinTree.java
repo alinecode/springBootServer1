@@ -2,6 +2,7 @@ package com.hello.store.test.service.binaryTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
  
 public class BinTree {
     public BinTree left;
@@ -25,7 +26,8 @@ public class BinTree {
     }
  
     public BinTree() {
- 
+    	
+
     }
  
     public void creat(Object[] objs){

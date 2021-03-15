@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 //简单说就是@Configuration的@Bean方法会进行cglib代理增强
 public class TestScheduled {
 
-//	@Scheduled(cron = "0 0 12 * * ?") // 每天中午12点执行。 Fire at 12:00 PM (noon) every day
+//	@Scheduled(cron = "0 0 12 * * ?") // cron表达式 每天中午12点执行。 Fire at 12:00 PM (noon) every day
 	@Scheduled(fixedDelay = 10000) // 10秒钟执行一次
 	public void setname() {
 		
