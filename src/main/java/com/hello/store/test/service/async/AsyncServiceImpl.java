@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
  * 在主类上使用@EnableAsync注解，
  * 然后再在spring管理的类中的方法上使用@Async注解，该方法就是多线程的。
  * 
+ * 该类没有实现接口，所以将使用cglib动态代理。否则将使用jdk动态代理。
+ * 根据这篇文章↓，jdk7、8的jdk动态代理的执行效率要比cglib快 (百分之二十)
+ * https://my.oschina.net/u/4544836/blog/4483994
+ * 
  * @author AL
  *
  */

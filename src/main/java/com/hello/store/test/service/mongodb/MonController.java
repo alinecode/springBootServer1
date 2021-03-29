@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.hello.store.test.entity.Test1;
-import com.hello.store.test.mongodb.Test1Repository;
 
 /**
  * MongoDB 20210204

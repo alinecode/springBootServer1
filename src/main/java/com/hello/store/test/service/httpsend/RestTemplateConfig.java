@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * 
- * 其他说明：springboot所包含的http请求完整代码都在这个包下面，不难理解。
+ * 其他说明：springboot所包含的http请求完整代码都在这个包(com.hello.store.test.service.httpsend)下面，不难理解。
  * 
  * 该类说明：让RestTemplate在使用时可以@Autowired
  * 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.hello.store.test.mongodb.Test1Repository;
+import com.hello.store.test.service.mongodb.Test1Repository;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplicationTests.class)
 public class DemoApplicationTests {

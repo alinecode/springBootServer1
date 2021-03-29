@@ -1,9 +1,14 @@
-package com.hello.store.test.service.binaryTree;
+package com.hello.store.test.service.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
  
+/**
+ * 简单二叉树
+ * @author AL
+ *
+ */
 public class BinTree {
     public BinTree left;
     public BinTree right;

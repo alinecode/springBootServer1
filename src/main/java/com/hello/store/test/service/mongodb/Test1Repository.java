@@ -1,4 +1,4 @@
-package com.hello.store.test.mongodb;
+package com.hello.store.test.service.mongodb;
 
 import java.util.Date;
 
@@ -10,7 +10,10 @@ import org.springframework.data.mongodb.repository.Query;
 import com.hello.store.test.entity.Test1;
 
 /**
- * 弃用
+ * 继承MongoRepository这种方式方式本项目已弃用。
+ * @see com.hello.store.test.service.mongodb.MonController
+ * 
+ * 参考资料
  * https://spring.io/guides/gs/accessing-data-mongodb/
  * https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#reference
  * https://docs.spring.io/spring-data/mongodb/docs/1.2.0.RELEASE/reference/html/mongo.repositories.html

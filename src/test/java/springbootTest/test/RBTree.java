@@ -71,6 +71,7 @@ public class RBTree {
 
 		TreeMap<String, String> map = new TreeMap<>();
 		map.put(aaString, "2");
+		map.put(null, "2");
 		map.put("bb", "2");
 		map.get("");
 		System.err.println(map.toString());
