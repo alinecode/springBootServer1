@@ -1,13 +1,19 @@
 package com.hello.store.test.service.userAccount;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.beetl.sql.core.engine.PageQuery;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.hello.store.test.annotationLog.annotation.LogLogin;
 import com.hello.store.test.dto.UserAccountDto;
 import com.hello.store.test.web.Data;
 import com.hello.store.test.web.Rtn;
@@ -21,6 +27,15 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@RequestMapping("/testPage")
+	public Data testPage(PageQuery<UserAccountDto> pageQuery,Rtn<PageQuery<UserAccountDto>> rtn) {
+		
+		pageQuery.setParas(JSON.parse(pageQuery.getParas() == null?"{}":pageQuery.getParas().toString()));
+		PageQuery<UserAccountDto> pageList = userService.pageList(pageQuery);
+		
+		return rtn.success(pageList);
+	}
+	
 	@RequestMapping(value = "/chatInit")
 	public String chatInit(UserAccountDto user, HttpServletRequest request) {
 
@@ -41,6 +56,7 @@ public class UserController {
 
 	@RequestMapping(value = "/login")
 	@ApiOperation(value = "登陆")
+	@LogLogin // 自定义注解测试
 	public String login(@RequestBody UserAccountDto user, HttpServletRequest request) {
 
 		// 更换数据库后

@@ -36,7 +36,6 @@ public class UserRedis {
 	
 	private static StringRedisTemplate stringRedisTemplate;
 	
-	
 	@Bean
 	public UserRedis init() {
 		

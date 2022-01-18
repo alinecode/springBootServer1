@@ -1,7 +1,9 @@
 package com.hello.store.test.service.userAccount;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.beetl.sql.core.engine.PageQuery;
 import org.beetl.sql.core.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +141,13 @@ public class UserServiceImpl implements UserService {
 		account.setPassword("1");
 		
 		return account;
+	}
+
+	@Override
+	public PageQuery<UserAccountDto> pageList(PageQuery<UserAccountDto> pageQuery) {
+//		PageQuery<UserAccountDto> executePageQuery = userAccountDao.getSQLManager().executePageQuery("sql语句", UserAccountDto.class, pageQuery);
+		PageQuery<UserAccountDto> executePageQuery = userAccountDao.getSQLManager().pageQuery("userAccount.pageQuery", UserAccountDto.class, pageQuery);
+		return executePageQuery;
 	}
 	
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author 
  *
  */
-//@Component  启用生效
+//@Component  // 启用注解生效
 public class StaticValueInj {
 
 	static String t11;
