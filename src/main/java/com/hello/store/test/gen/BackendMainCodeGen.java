@@ -98,15 +98,9 @@ public class BackendMainCodeGen {
 		System.out.println("======生成代码======");
 //        Set<String> tables = sqlManager.getMetaDataManager().allTable(); // 生成所有表代码
 		Set<String> tables = new HashSet<>();
-		tables.add("wz52");
-//		tables.add("wz51");
-//		tables.add("jh03");
-//		tables.add("jh04");
-//		tables.add("jh06");
-//		tables.add("jh07");
-//		tables.add("jh08");
-//		tables.add("jh09");
-//		tables.add("yw10");
+		tables.add("yj05");
+		tables.add("yj06");
+
 		for (String table : tables) {
 			System.out.printf("%-20s %s\n", table, "生成完毕");
 			if ("user_info".equals(table)) {

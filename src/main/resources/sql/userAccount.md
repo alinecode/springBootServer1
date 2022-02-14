@@ -1,3 +1,8 @@
+pageQuery
+===
+
+	select #page()# from user_account where #use("condition")#
+
 sample
 ===
 * 注释###
