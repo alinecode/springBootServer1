@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  * 官方文档还描述了动态代理机制的选择：  只要目标对象实现了接口，那么就使用java的jdk代理。（因为JDK代理只提供基于接口的代理）
  * 否则就要使用spring包包含的CGLIB代理
  * 
- * 官方文档10.6.1介绍了spring AOP是基于代理的（proxy-based），而AspectJ不是
+ * 官方文档10.6.1介绍了spring AOP是基于代理的（proxy-based），10.7介绍了@AspectJ代理
  * 
  * 
  * 

@@ -37,7 +37,7 @@ import com.hello.store.test.gen.genImpl.ServiceImplCodeGen;
 	beetlsql.sqlPath=/beetlsql
 	beetlsql.nameConversion=org.beetl.sql.core.UnderlinedNameConversion
  * 2、maven中有beetl-framework-starter 1.2.35版本或者以上版本的引用。如果低于该版本，有的方法可能无法使用。
- * 3、在Java project的resource下面新建beetlsql文件夹，用来存放生成的SQL md文件。在那再新建一个文件夹beetlsqlTemplate用来存放模板文件。
+ * 3、在Java project的resource下面新建beetlsql文件夹，用来存放生成的SQL md文件。然后在resource下再新建一个文件夹beetlsqlTemplate用来存放模板文件。
  * 4、把本项目的模板文件复制进你的的项目。自行修改模板文件为合适的。
  * 5、运行生成后刷新项目代码即可以看到生成的代码。
  * 

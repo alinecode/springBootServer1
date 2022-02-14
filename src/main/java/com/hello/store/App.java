@@ -8,6 +8,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.tencent.devops.leaf.plugin.annotation.EnableLeafServer;
+
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
  
 @SpringBootApplication
@@ -15,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableScheduling
 @EnableAsync
+@EnableLeafServer
 public class App extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
