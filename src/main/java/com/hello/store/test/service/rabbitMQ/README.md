@@ -128,6 +128,15 @@ Topic的路由键是一串由小数点分开的字符串，特殊符号星*号�
 Headers模式 是一组键值对，自定义匹配规则，有符合条件的键值对就会被投送到对应队列。
 Fanout模式是把消息发送到所有绑定到该交换机的全部队列。
 
+五、其他
+===
 
+1、开启可视化界面： 进入rabbitMQ安装目录的sbin目录，打开cmd输入以下命令后回车：
+
+	rabbitmq-plugins enable rabbitmq_management
+
+然后浏览器打开 http://localhost:15672/ 可以使用默认的管理员账户密码登陆，默认的账号密码都是：guest
+
+如果登陆不上去可以换个浏览器试一下（因为有一些插件会影响，比如TimerHooker）。
 
 
