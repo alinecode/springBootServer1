@@ -16,7 +16,7 @@ import com.tencent.devops.leaf.service.SegmentService;
 @RequestMapping("/genidTest")
 public class IdGenTest {
 
-	@Autowired
+	@Autowired(required = false)
     private SegmentService segmentService;
 	
 	@RequestMapping("/1")

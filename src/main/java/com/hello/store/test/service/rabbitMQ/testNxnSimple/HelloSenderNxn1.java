@@ -11,7 +11,7 @@ public class HelloSenderNxn1 {
 	private AmqpTemplate rabbitTemplate;
 
 	public void send(String context) {
-		context = "helloNxn " + context;
+		context = "helloNxn1 " + context;
 //		System.out.println("SenderNxn1 : " + context);
 		this.rabbitTemplate.convertAndSend("helloNxn", context);
 	}

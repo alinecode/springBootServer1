@@ -42,7 +42,7 @@ Linux安装程序 ： 上面的官方引导有。
 	spring.rabbitmq.password=guest
 
 2、新建一个配置类，注入一个队列的Bean。比如如下代码：↓。关键代码：new Queue("hello")。这是一个重载的构造方法，可以指定是否持久化（默认为是）、是否只是当前连接使用（断开就删除，默认为否）、是否自动删除（就是久了没用就自动删了，默认为否），后面的new交换机也一样有这些部分内容。
-/src/main/java/com/hello/store/test/service/rabbitMQ/test1x1Simple/RabbitConfig.java
+/src/main/java/com/hello/store/test/service/rabbitMQ/test1x1Simple/RabbitConfig.java 
 
 3、新建一个消息发送者代码，比如：↓。关键代码：rabbitTemplate.convertAndSend("hello", context); 其中的hello和配置类关键代码中的hello联系。
 /src/main/java/com/hello/store/test/service/rabbitMQ/test1x1Simple/HelloSender.java
@@ -63,6 +63,7 @@ RabbitMqHelloTest.hello1x1()方法，使用Junit启动。启动正常可以就�
 ===
 
 1、convertAndSend可以发送对象，因为它的参数是object，接收者同样以对象来接收，对象需实现序列化接口。
+
 2、topic方式：代码在这个包下面： testTopic 。配置类关键代码：
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
@@ -70,6 +71,7 @@ RabbitMqHelloTest.hello1x1()方法，使用Junit启动。启动正常可以就�
     }
 	
 参数名称就是配置类的一个方法名称（@Bean()自己写名称可以自己试一下）。
+
 3、Fanout方式：
 和topic方式类似的，关键代码：
 
@@ -85,33 +87,42 @@ RabbitMqHelloTest.hello1x1()方法，使用Junit启动。启动正常可以就�
 多个队列都绑定到 fanoutExchange 这个交换机中，当发送消息，这里的每一个的队列都将收到发送的消息。
 
 4、消息发送者的消息确认方式
+主要相关代码 /test1x1Simple/RabbitTemplateConfig.java 。
 
 需要在配置文件中使用
-spring.rabbitmq.publisher-confirms=true
+spring.rabbitmq.publisher-confirms=true #（新版本boot是 spring.rabbitmq.publisher-confirm-type=correlated ）
 spring.rabbitmq.publisher-returns=true
 
-1）、设置发送确认： rabbitTemplate.setConfirmCallback 参数都是直接new
-2）、设置返回回馈： rabbitTemplate.setReturnCallback
+1）、配置文件设置发送确认： rabbitTemplate.setConfirmCallback 参数都是直接new
+2）、配置文件设置返回回馈： rabbitTemplate.setReturnsCallback
 只要执行发送到交换机就会执行1）；
 找到该交换机，没有找到队列，就还会执行2）；
 找到交换机，并且找到队列正常推送，就会只执行1）
 
 5、消息接收者的消息确认方式
+主要相关代码：/test1x1Simple/HelloReceiver.java
+默认是自动确认。
 
-配置文件中加上：
+修改成手动确认：接收者项目中，配置文件中加上：
 spring.rabbitmq.listener.direct.acknowledge-mode=MANUAL
+spring.rabbitmq.listener.simple.acknowledge-mode=MANUAL
 
-待续...........
-
-（如果失败，会自动重放，可以在配置文件中设置重放次数，超过次数就将舍弃消息。）
+接收者代码中的使用：
+@RabbitHandler 注解的方法，加上Channel channel, Message message这两个参数。
+可以使用channel.basicAck 的方法确认消息，还可以使用channel.basicReject方法拒绝消息，详情请看相关文档。
+注意：没有basicAck就结束的消息，只有一个接收者的情况下，会在项目重启启动后就马上接收重新投放（每次重启如果还是没有确认，就又要接收一次，所以开启手动ack了就一定不要忘了要写上手动ack的代码）。
+如果没有接收到ack确认，会自动重放，可以在配置文件中设置重放次数，超过次数就将舍弃消息（spring.rabbitmq.listener.direct.retry.enabled）。
 
 
 四、相关概念
 ===
 
 1、流程概览
+
 交换机和队列绑定，消息发送者（也叫生产者）发送信息到交换机，交换机根据路由键来调度看往哪一个队列中推送信息，消息接收者（也叫消费者）从队列拿消息。
+
 2、交换机
+
 交换机(Exchange)有4种模式来调度，direct是其默认的调度方式（根据key完全匹配调度）。另外还有 Topic（灵活的）、Headers、Fanout（转发到所有队列）
 Topic的路由键是一串由小数点分开的字符串，特殊符号星*号表示一个，井#号表示多个。
 Headers模式 是一组键值对，自定义匹配规则，有符合条件的键值对就会被投送到对应队列。

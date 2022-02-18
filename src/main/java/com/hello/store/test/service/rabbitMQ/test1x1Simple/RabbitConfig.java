@@ -1,5 +1,6 @@
 package com.hello.store.test.service.rabbitMQ.test1x1Simple;
 
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,14 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Bean
-    public Queue Queue() {
+    public Queue queue() {
+//        return new Queue("hello",false,true, false);
         return new Queue("hello");
     }
-
+    
+    @Bean
+    DirectExchange lonelyDirectExchange() {
+        return new DirectExchange("lonelyDirectExchange");
+    }
+    
 }
