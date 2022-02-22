@@ -42,7 +42,6 @@ public class AspectConfig {
 	 * 声明要对哪些方法增强 第一个*表示任意返回值，最后括号里的加两个点表示不管有多少个参数。 pointcut
 	 * 里面的execution等表达式可以看官方文档的10.2.3
 	 * 
-
 	 * 
 	 */
 	@Pointcut("execution(* com.hello..*Controller.*(..))")

@@ -3,7 +3,7 @@ package com.hello.store.test.webservice;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 /**
- * 笔记 http://note.youdao.com/s/QFopceZB
+ * 笔记以及客户端测试过程： http://note.youdao.com/s/QFopceZB
  * 服务端调用
  * @author 
  *
