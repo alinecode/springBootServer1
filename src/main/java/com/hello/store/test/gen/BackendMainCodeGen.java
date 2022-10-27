@@ -49,8 +49,7 @@ public class BackendMainCodeGen {
 	// ========数据库配置=========
 	private static String driver = "com.mysql.jdbc.Driver";
 //    private static String url = "jdbc:mysql://localhost:3306/books?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CTT";
-//	private static String url = "jdbc:mysql://127.0.0.1:3306/qiqiim?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC";
-	private static String url = "jdbc:mysql://192.168.9.120:3306/dst_ncwz?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC";
+	private static String url = "jdbc:mysql://127.0.0.1:3306/qiqiim?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC";
 	private static String userName = "root";
     private static String password = "123456";
 //	private static String password = "1234";
@@ -98,8 +97,7 @@ public class BackendMainCodeGen {
 		System.out.println("======生成代码======");
 //        Set<String> tables = sqlManager.getMetaDataManager().allTable(); // 生成所有表代码
 		Set<String> tables = new HashSet<>();
-		tables.add("yj05");
-		tables.add("yj06");
+		tables.add("user_info");
 
 		for (String table : tables) {
 			System.out.printf("%-20s %s\n", table, "生成完毕");
@@ -120,7 +118,7 @@ public class BackendMainCodeGen {
             daoCodeGen(sqlManager, config, table);
             // 生成service实现类
             genServiceImpl(sqlManager, config, table);
-            // 生成controller实现类
+            // 生成controller
             genController(sqlManager, config, table);
 
 		}
@@ -135,10 +133,11 @@ public class BackendMainCodeGen {
 	}
 	
 	public static void genServiceImpl(SQLManager sqlManager, GenConfig config, String table) {
+		TableDesc desc = sqlManager.getMetaDataManager().getTable(table);
 		String className = sqlManager.getNc().getClassName(table);
 		ServiceImplCodeGen serviceCodeGen = new ServiceImplCodeGen(servicePkg+"."+StringKit.toLowerCaseFirstOne(className));// 指定包名
 		serviceCodeGen.setMapperTemplate(config.getTemplate(templatePath + "/serviceImpl.btl")); // 指定模板
-		serviceCodeGen.genCode(pojoPkg, className,null, null, false, dtoPkg, daoPkg); // 开始生成。参数依次为包名、类名、表结构
+		serviceCodeGen.genCode(pojoPkg, className,desc, null, false, dtoPkg, daoPkg,sqlManager); // 开始生成。参数依次为包名、类名、表结构
 	}
 	
 	
@@ -147,6 +146,7 @@ public class BackendMainCodeGen {
 	 */
     public static void genMd(SQLManager sqlManager, GenConfig config, String table) throws IOException {
         String fileName = StringKit.toLowerCaseFirstOne(sqlManager.getNc().getClassName(table));
+        // 取消前缀，转成小写，第一个字母转成大写
         if (config.getIgnorePrefix() != null && !config.getIgnorePrefix().trim().equals("")) {
             fileName = fileName.replaceFirst(StringKit.toLowerCaseFirstOne(config.getIgnorePrefix()), "");
             fileName = StringKit.toLowerCaseFirstOne(fileName);
@@ -184,7 +184,7 @@ public class BackendMainCodeGen {
 		String className = sqlManager.getNc().getClassName(table);
 		ServiceCodeGen serviceCodeGen = new ServiceCodeGen(servicePkg+"."+StringKit.toLowerCaseFirstOne(className));// 指定包名
 		serviceCodeGen.setMapperTemplate(config.getTemplate(templatePath + "/service.btl")); // 指定模板
-		serviceCodeGen.genCode(dtoPkg, className,null, null, false); // 开始生成。参数依次为包名、类名、表结构
+		serviceCodeGen.genCode(dtoPkg, className,null, null, false,pojoPkg); // 开始生成。参数依次为包名、类名、表结构
 //		serviceCodeGen.genCode(dtoPkg, sqlManager.getNc().getClassName(table),
 //				sqlManager.getMetaDataManager().getTable(table), null, false); // 开始生成。参数依次为包名、类名、表结构
 	}

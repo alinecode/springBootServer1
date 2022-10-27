@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hello.store.test.util.ExcelUtils;
-
 @Service
 public class ExcelServiceImpl implements ExcelService {
 
@@ -45,7 +43,7 @@ public class ExcelServiceImpl implements ExcelService {
 			
 		}
 			
-		ExcelUtils.writeExcel_ToXLS(list, os);
+//		ExcelUtils.writeExcel_ToXLS(list, os);
 //		os.flush();
 //		os.close();
 	}

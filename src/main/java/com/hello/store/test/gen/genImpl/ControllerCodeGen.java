@@ -58,6 +58,7 @@ public class ControllerCodeGen {
 //		String serviceImplName = entityClass+"ServiceImpl";
 		template.binding("package", pkg);
 		template.binding("className", className);
+		template.binding("entityClass", entityClass);
 		template.binding("serviceName", serviceName);
 		String serviceNameLower = StringUtils.replace(serviceName, serviceName.substring(0, 1), serviceName.substring(0, 1).toLowerCase(), 1);
 		template.binding("serviceNameLower", serviceNameLower);
@@ -75,6 +76,8 @@ public class ControllerCodeGen {
 //		t.append("import " + servicePkg + "." + serviceName + ";");
 //		t.append(SourceGen.CR);
 		t.append("import " + entityDtoPkg + "." + entityDto + ";");
+		t.append(SourceGen.CR);
+		t.append("import " + entityPkg + "." + entityClass + ";");
 		t.append(SourceGen.CR);
 //		t.append("import " + daoPkg + "." + daoName + ";");
 //		t.append(SourceGen.CR);

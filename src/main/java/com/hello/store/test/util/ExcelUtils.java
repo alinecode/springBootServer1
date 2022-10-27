@@ -13,44 +13,44 @@ import org.apache.poi.ss.usermodel.Cell;
 public class ExcelUtils {
 
 	
-	public static void writeExcel_ToXLS(List<Object[]> list,OutputStream os) throws Exception {
-		// 创建一个空白的 WorkBook
-		@SuppressWarnings("resource")
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();// 2007
-
-		int rows = list.size() / 65535;// 每页最大65535 row
-		rows = (list.size() % 65535) != 0 ? rows + 1 : rows;
-
-		for (int i = 0; i < rows; i++) {
-
-			HSSFSheet st = hssfWorkbook.createSheet("第" + (i + 1) + "页");
-			// 循环数据 row
-			for (int j = i * 65535; j <= ((i + 1) * 65535); j++) {
-				if (j >= list.size()) {
-					break;
-				}
-				Object[] data_row = list.get(j);
-				HSSFRow row = st.createRow(j - (i * 65535));
-				// 循环 cell
-				for (int k = 0; k < data_row.length; k++) {
-					Object data_cell = data_row[k];
-					if (data_cell != null) {
-						// 设置位置 和 类型
-						@SuppressWarnings("deprecation")
-						HSSFCell cell = row.createCell(k, Cell.CELL_TYPE_STRING);
-						// 设置值
-						cell.setCellValue(new HSSFRichTextString(data_cell.toString()));
-					}
-					if (k >= 255) { throw new Exception("数据项不能大于255个"); }
-				}
-
-			}
-
-		}
-		
-//		FileOutputStream writeFile = new FileOutputStream("d:\\仓库模板.xls");
-		hssfWorkbook.write(os);
-	}
+//	public static void writeExcel_ToXLS(List<Object[]> list,OutputStream os) throws Exception {
+//		// 创建一个空白的 WorkBook
+//		@SuppressWarnings("resource")
+//		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();// 2007
+//
+//		int rows = list.size() / 65535;// 每页最大65535 row
+//		rows = (list.size() % 65535) != 0 ? rows + 1 : rows;
+//
+//		for (int i = 0; i < rows; i++) {
+//
+//			HSSFSheet st = hssfWorkbook.createSheet("第" + (i + 1) + "页");
+//			// 循环数据 row
+//			for (int j = i * 65535; j <= ((i + 1) * 65535); j++) {
+//				if (j >= list.size()) {
+//					break;
+//				}
+//				Object[] data_row = list.get(j);
+//				HSSFRow row = st.createRow(j - (i * 65535));
+//				// 循环 cell
+//				for (int k = 0; k < data_row.length; k++) {
+//					Object data_cell = data_row[k];
+//					if (data_cell != null) {
+//						// 设置位置 和 类型
+//						@SuppressWarnings("deprecation")
+//						HSSFCell cell = row.createCell(k, Cell.CELL_TYPE_STRING);
+//						// 设置值
+//						cell.setCellValue(new HSSFRichTextString(data_cell.toString()));
+//					}
+//					if (k >= 255) { throw new Exception("数据项不能大于255个"); }
+//				}
+//
+//			}
+//
+//		}
+//		
+////		FileOutputStream writeFile = new FileOutputStream("d:\\仓库模板.xls");
+//		hssfWorkbook.write(os);
+//	}
 	
 	
 	/**
