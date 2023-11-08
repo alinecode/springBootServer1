@@ -13,6 +13,23 @@ import org.beetl.sql.ext.gen.SourceGen;
 
 /**
  * 
+ * {
+    "package": "实现类所在包名文字，可能以小数点分割。（是new本类的时候传的，传的时候组装而成）",
+    "imports": "引用的dto、pojo、dao的类型的引用文字。",
+    "className": "ServiceImpl的名字。传入的pojo类名组装而成。（调用本方法时，传入的）",
+    "entityClass": "pojo类名。调用时传的",
+    "entityClassLow": "pojo变量名",
+    "entityDto": "Dto名字，由entityClass组装而成。",
+    "lowEntityDto": "dto属性名称，Dto的第一个字母小写而来。",
+    "dbidName": "数据库id字段",
+    "idNameProperty": "Java类的id属性字段",
+    "methodName": "Java类的id属性字段首字母大写，方便组装get",
+    "tbname": "表名",
+    "serviceName": "接口名字",
+    "daoName": "dao的名字",
+    "daoNameLower": "dao的变量名"
+}
+ * 
  * 修改自：{@link org.beetl.sql.ext.gen.MapperCodeGen}
  * 
  * @author AL 不使用StringUtils也可以使用beetl的StringKit.toLowerCaseFirstOne

@@ -9,6 +9,7 @@ import java.util.Set;
 import org.beetl.sql.core.ClasspathLoader;
 import org.beetl.sql.core.ConnectionSource;
 import org.beetl.sql.core.ConnectionSourceHelper;
+import org.beetl.sql.core.Interceptor;
 import org.beetl.sql.core.SQLLoader;
 import org.beetl.sql.core.SQLManager;
 import org.beetl.sql.core.UnderlinedNameConversion;
@@ -17,6 +18,7 @@ import org.beetl.sql.core.db.MySqlStyle;
 import org.beetl.sql.core.db.TableDesc;
 import org.beetl.sql.core.kit.GenKit;
 import org.beetl.sql.core.kit.StringKit;
+import org.beetl.sql.ext.DebugInterceptor;
 import org.beetl.sql.ext.gen.GenConfig;
 import org.beetl.sql.ext.gen.MDCodeGen;
 
@@ -109,6 +111,14 @@ public class BackendMainCodeGen {
 			sqlManager.genPojoCode(table, pojoPkg);
 			// 使用自定义方法生成dto
 			genDtoCode(sqlManager, config, table);
+
+			// 生成excelData
+			genExcelDataCode(sqlManager, config, table);
+			
+//			if (1<2) {
+//				continue;
+//			}
+			
 			// 生成service接口：↓(也可以放到genPojoCode方法的参数中，
 			// 使用方法参见：https://javamonkey.github.io/guide/beetlsql.html 20.2. 生成更多的代码以及ext下面几个类的源码)
 			genService(sqlManager, config, table);
@@ -120,16 +130,37 @@ public class BackendMainCodeGen {
             genServiceImpl(sqlManager, config, table);
             // 生成controller
             genController(sqlManager, config, table);
-
+            
+            // 生成ExcelDataListener
+            genExcelDataListener(sqlManager, config, table);
 		}
 		System.out.println("=====生成完毕=====");
 	}
 
 	public static void genController(SQLManager sqlManager, GenConfig config, String table) {
 		String className = sqlManager.getNc().getClassName(table);
+		TableDesc desc = sqlManager.getMetaDataManager().getTable(table);
 		ControllerCodeGen serviceCodeGen = new ControllerCodeGen(controllerPkg+"."+StringKit.toLowerCaseFirstOne(className));// 指定包名
 		serviceCodeGen.setMapperTemplate(config.getTemplate(templatePath + "/controller.btl")); // 指定模板
-		serviceCodeGen.genCode(pojoPkg, className,null, null, false, dtoPkg, daoPkg,servicePkg+"."+StringKit.toLowerCaseFirstOne(className)); // 开始生成。参数依次为包名、类名、表结构
+		serviceCodeGen.genCode(pojoPkg, className,desc, null, false, dtoPkg, daoPkg,servicePkg+"."+StringKit.toLowerCaseFirstOne(className)
+		,"Controller", sqlManager
+				); // 开始生成。参数依次为包名、类名、表结构
+	}
+	
+	/**
+	 * 生成ExcelDataListener代码
+	 * @param sqlManager
+	 * @param config
+	 * @param table
+	 */
+	public static void genExcelDataListener(SQLManager sqlManager, GenConfig config, String table) {
+		String className = sqlManager.getNc().getClassName(table);
+		TableDesc desc = sqlManager.getMetaDataManager().getTable(table);
+		ControllerCodeGen serviceCodeGen = new ControllerCodeGen(controllerPkg+"."+StringKit.toLowerCaseFirstOne(className));// 指定包名
+		serviceCodeGen.setMapperTemplate(config.getTemplate(templatePath + "/excelDataListener.btl")); // 指定模板
+		serviceCodeGen.genCode(pojoPkg, className,desc, null, false, dtoPkg, daoPkg,servicePkg+"."+StringKit.toLowerCaseFirstOne(className)
+		,"ExcelDataListener",sqlManager
+				); // 开始生成。参数依次为包名、类名、表结构
 	}
 	
 	public static void genServiceImpl(SQLManager sqlManager, GenConfig config, String table) {
@@ -165,16 +196,29 @@ public class BackendMainCodeGen {
     	codeGen.genCode(pojoPkg, sqlManager.getNc().getClassName(table), null, null, false);
 	}
     
+    /**
+     * 生成dto文件
+     * @param sqlManager
+     * @param config
+     * @param table
+     */
+    public static void genDtoCode(SQLManager sqlManager, GenConfig config, String table) {
+    	config.setTemplate(config.getTemplate(templatePath + "/pojoDto.btl"));
+    	DtoCodeGen dtoCodeGen = new DtoCodeGen();
+    	dtoCodeGen.genCode(sqlManager, table, dtoPkg, GenKit.getJavaSRCPath(), config,sqlManager.getNc().getClassName(table)+"Dto");
+    }
+    
 	/**
-	 * 生成dto文件
+	 * 生成excelData文件
 	 * @param sqlManager
 	 * @param config
 	 * @param table
 	 */
-	public static void genDtoCode(SQLManager sqlManager, GenConfig config, String table) {
-		config.setTemplate(config.getTemplate(templatePath + "/pojoDto.btl"));
+	public static void genExcelDataCode(SQLManager sqlManager, GenConfig config, String table) {
+		config.setTemplate(config.getTemplate(templatePath + "/excelData.btl"));
 		DtoCodeGen dtoCodeGen = new DtoCodeGen();
-		dtoCodeGen.genCode(sqlManager, table, dtoPkg, GenKit.getJavaSRCPath(), config,sqlManager.getNc().getClassName(table)+"Dto");
+		String className = sqlManager.getNc().getClassName(table);
+		dtoCodeGen.genCode(sqlManager, table, servicePkg+ "." +StringKit.toLowerCaseFirstOne(className), GenKit.getJavaSRCPath(), config,sqlManager.getNc().getClassName(table)+"Data");
 	}
 	
 	/**

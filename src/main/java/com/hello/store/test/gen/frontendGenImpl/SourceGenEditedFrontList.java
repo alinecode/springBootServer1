@@ -2,6 +2,7 @@ package com.hello.store.test.gen.frontendGenImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class SourceGenEditedFrontList {
 //			pkg = entityPkg;
 //		}
 		Template template = SourceGen.getGt().getTemplate(aTemplate);
-		String frontModelName = tableDesc.getRemark()==null?entityClass:tableDesc.getRemark()+"查询";
+		String frontModelName = StringUtils.isBlank(tableDesc.getRemark())?entityClass:tableDesc.getRemark()+"查询";
 //		String daoName = entityClass+"Dao";
 //		String entityDto = entityClass+"Dto";
 //		String serviceName = entityClass+"Service";
@@ -77,16 +78,18 @@ public class SourceGenEditedFrontList {
 		
 		Set<String> cols = tableDesc.getCols();
 		List<Map> attrs = new ArrayList<Map>();
+		
+		List<Map> frontQueryField = new ArrayList<Map>();
+		
+		// 详情页面有三个通用字段不显示
+		List<String> asList = Arrays.asList("orgid","aae011","aae036");
+		
 		for (String col : cols) {
 
 			ColDesc desc = tableDesc.getColDesc(col);
 			Map attr = new HashMap();
 			attr.put("comment", desc.remark);
 			String attrName = sm.getNc().getPropertyName(null, desc.colName);
-			
-			if (!StringUtils.contains(attrName.toLowerCase(), "name")) {
-				continue;
-			}
 			
 			attr.put("name", attrName);
 			String type = JavaType.getType(desc.sqlType, desc.size, desc.digit);
@@ -98,13 +101,37 @@ public class SourceGenEditedFrontList {
 			}
 
 			attr.put("type", type);
+			
+			// 主键不显示
+			boolean isKey = tableDesc.getIdNames().contains(desc.colName);
+			if (isKey) {
+				continue;
+			}
+			
+			// 控制LIST查询页中只显示前6个字段
+			if ((!StringUtils.contains(entityClass, "DDetail")) && attrs.size()>=6) {
+				break;
+			}else {
+				// 详情页面有三个通用字段不显示
+				if (asList.contains(attrName)) {
+					continue;
+				}
+				
+			}
+			
 			attrs.add(attr);
+			
+			// 查询只显示前3个字段
+			if (frontQueryField.size() < 3) {
+				frontQueryField.add(attr);
+			}
 		}
-		if (attrs.isEmpty()) {
-			template.binding("frontQueryField", attrs);
-		}else {			
-			template.binding("frontQueryField", attrs);
+		
+		if (!frontQueryField.isEmpty()) {
+			template.binding("frontQueryField", frontQueryField);
 		}
+		template.binding("attrs", attrs);
+		
 //		template.binding("serviceName", serviceName);
 //		String serviceNameLower = StringUtils.replace(serviceName, serviceName.substring(0, 1), serviceName.substring(0, 1).toLowerCase(), 1);
 //		template.binding("serviceNameLower", serviceNameLower);
@@ -134,7 +161,7 @@ public class SourceGenEditedFrontList {
 			try {
 				SourceGenEdited.saveSourceFileFront(frontDir, pkg, entityClass, renderCode);
 			} catch (IOException e) {
-				throw new RuntimeException("serviceImpl代码生成失败", e);
+				throw new RuntimeException("前端代码生成失败", e);
 			}
 		}
 

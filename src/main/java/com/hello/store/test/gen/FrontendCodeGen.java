@@ -1,5 +1,6 @@
 package com.hello.store.test.gen;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import org.beetl.sql.ext.gen.GenConfig;
 
 import com.hello.store.test.gen.cof.GenConfigEdit;
 import com.hello.store.test.gen.frontendGenImpl.SourceGenEditedFrontList;
+
 
 /**
  * 生成前端代码。
@@ -62,23 +64,40 @@ public class FrontendCodeGen {
 		Set<String> tables = new HashSet<>();
 		tables.add("yw09");
 		for (String table : tables) {
-			System.out.printf("%-20s %s\n", table, "生成完毕");
+			// 生成前端list文件
 			genList(sqlManager, config, table);
+			// 生成前端details文件
+			genDetail(sqlManager, config, table);
+			System.out.printf("%-20s %s\n", table, "生成完毕");
 		}
 		System.out.println("=====生成前端完毕=====");
 		
 	}
 	
 	/**
-	 * 生成service文件
+	 * 生成前端details文件
+	 */
+	public static void genDetail(SQLManager sqlManager, GenConfig config, String table) {
+		GenConfigEdit genConfigEdit = new GenConfigEdit();
+		String className = sqlManager.getNc().getClassName(table); 
+		SourceGenEditedFrontList sourceGenEditedFrontList = new SourceGenEditedFrontList(fronttemplatePath, fronttemplatePathSub+ File.separator +className);
+		sourceGenEditedFrontList.setMapperTemplate(genConfigEdit.getTemplate(templatePath + "/frontDetail.btl")); // 指定模板
+		TableDesc desc = sqlManager.getMetaDataManager().getTable(table);
+		sourceGenEditedFrontList.genCode(null, className+"DDetail", desc, genConfigEdit, false, null, null, null, sqlManager);
+//		serviceCodeGen.genCode(dtoPkg, sqlManager.getNc().getClassName(table),
+//				sqlManager.getMetaDataManager().getTable(table), null, false); // 开始生成。参数依次为包名、类名、表结构
+	}
+	
+	/**
+	 * 生成前端list文件
 	 */
 	public static void genList(SQLManager sqlManager, GenConfig config, String table) {
 		GenConfigEdit genConfigEdit = new GenConfigEdit();
 		String className = sqlManager.getNc().getClassName(table); 
-		SourceGenEditedFrontList editedFrontList = new SourceGenEditedFrontList(fronttemplatePath, fronttemplatePathSub);
-		editedFrontList.setMapperTemplate(genConfigEdit.getTemplate(templatePath + "/frontList.btl")); // 指定模板
+		SourceGenEditedFrontList sourceGenEditedFrontList = new SourceGenEditedFrontList(fronttemplatePath, fronttemplatePathSub+ File.separator +className);
+		sourceGenEditedFrontList.setMapperTemplate(genConfigEdit.getTemplate(templatePath + "/frontList.btl")); // 指定模板
 		TableDesc desc = sqlManager.getMetaDataManager().getTable(table);
-		editedFrontList.genCode(null, className, desc, genConfigEdit, false, null, null, null, sqlManager);
+		sourceGenEditedFrontList.genCode(null, className, desc, genConfigEdit, false, null, null, null, sqlManager);
 //		serviceCodeGen.genCode(dtoPkg, sqlManager.getNc().getClassName(table),
 //				sqlManager.getMetaDataManager().getTable(table), null, false); // 开始生成。参数依次为包名、类名、表结构
 	}

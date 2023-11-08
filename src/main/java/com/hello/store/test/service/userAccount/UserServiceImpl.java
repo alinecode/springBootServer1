@@ -1,6 +1,5 @@
 package com.hello.store.test.service.userAccount;
 
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.beetl.sql.core.engine.PageQuery;
